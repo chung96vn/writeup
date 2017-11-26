@@ -1,4 +1,4 @@
-#Write Up Of AceBear Team
+#Writeup Of AceBear Team
 
 First, use IDA pro to view source code i have:
 ```C
@@ -36,7 +36,7 @@ int printFlag()
 ```
 When i input username, i can overwrite value of `v6`.
 In this case i overwrite value of `v6` to `%s`.
-In next step i can overflow stack and overwrite return address to address of printFlag().
+In next step i can overflow stack and overwrite return address to address of `printFlag()`.
 
 ```py
 from pwn import *
