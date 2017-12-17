@@ -1,0 +1,5 @@
+break *0x4009A0
+break *0x400b9c
+break *0x7ffcaaccf4d8
+
+
