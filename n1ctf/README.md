@@ -1,7 +1,7 @@
 ## Mở đầu
 Hôm nay mình sẽ trình bày lại một kỹ thuật hay trong exploit heap data in thread handle.
 
-Bài viết bắt nguần ý tưởng từ một write up khác: [link](https://gist.github.com/romanking98/630f2b3c7216ae389f4ea3ce551041e1)
+Bài viết bắt nguồn ý tưởng từ một write up khác: [link](https://gist.github.com/romanking98/630f2b3c7216ae389f4ea3ce551041e1)
 
 Bài viết này mình sẽ phân tích rõ hơn cũng như cụ thể hơn write up được dẫn ở link trên.
 
@@ -12,7 +12,7 @@ Libc: [Download](libc.so.6)
 
 ## Start analysis
 
-Dưới đây là mã nguần của thread
+Dưới đây là mã nguồn của thread
 ```c
 __int64 __fastcall start_routine(void *a1)
 {
@@ -104,13 +104,13 @@ Về cơ bản lỗi của chương trình là lỗi heap overflow. Thoạt nhì
 Tuy nhiên mình không có cách nào để có thể lấy ra được địa chỉ của heap. Nên việc sử dụng `House of Orange` có vẻ không ổn.
 
 Vậy câu hỏi đặt ra cho mình lúc này là?? Kỹ thuật sử dụng ở đây là gì?? Mĩnh cũng đọc malloc.c cũng tìm kiếm các đoạn code có liên quan nhưng có vẻ mọi thứ không được như ý muốn.
-Rồi mình nhận được write up của một team khác. Đọc qua thì thấy forcus vào `_int_malloc`. Ohhhhhhhhhhhhhhhhhhhhh đây rồi.
+Rồi mình nhận được write up của một team khác. Đọc qua thì thấy focus vào `_int_malloc`. Ohhhhhhhhhhhhhhhhhhhhh đây rồi.
 
 Mình đọc qua hướng của tác giả nhưng cũng không được hiểu cho lắm vì tác giả viết không được rõ ràng. Chính vì thế mình quyết định debug libc để có thể hiểu rõ hơn.
 
 Sau đây mình sẽ trình bày quá trình phân tích libc của mình. Để tiện cho việc phân tích thì mình đã turn off ASLR: `echo 0 | sudo tee /proc/sys/kernel/randomize_va_space`
 
-Forcus vào `_int_malloc` [source](https://github.com/str8outtaheaps/heapwn/blob/master/malloc/sysmalloc.c#L142)
+Focus vào `_int_malloc` [source](https://github.com/str8outtaheaps/heapwn/blob/master/malloc/sysmalloc.c#L142)
 ```c
 static void* sysmalloc(INTERNAL_SIZE_T nb, mstate av)
 {
